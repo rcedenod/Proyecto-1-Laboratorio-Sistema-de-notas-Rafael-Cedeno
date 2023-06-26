@@ -17,6 +17,53 @@ struct Estudiantes
     int notas_artes;
 };
 
+//Funciones que se van a usar:
+void todos_los_estudiantes();
+
+//Dandole los procesos a las funciones
+void todos_los_estudiantes()
+{
+    ifstream archivo("c://Prueba//Datos_Estudiantes.csv", ios::in);
+    if (!archivo)
+    {
+        cout << "Error al abrir el archivo" << endl;
+    }
+    else
+    {
+        string linea, nombre, apellido, email, genero, matematicas, sociales, biologia, fisica, educ_fisica, artes;
+
+        while (getline(archivo, linea))
+        {
+            int numestudiantes = 0;
+
+            getline(archivo, nombre, ';');
+            getline(archivo, apellido, ';');
+            getline(archivo, email, ';');
+            getline(archivo, genero, ';');
+            getline(archivo, matematicas, ';');
+            getline(archivo, sociales, ';');
+            getline(archivo, biologia, ';');
+            getline(archivo, fisica, ';');
+            getline(archivo, educ_fisica, ';');
+            getline(archivo, artes, '\n');
+
+            cout << "Nombre: " << nombre << ", "
+                 << "Apellido: " << apellido << ", "
+                 << "E-mail: " << email << ", "
+                 << "Genero: " << genero << ", "
+                 << "Nota matematicas: " << matematicas << ", "
+                 << "Nota sociales: " << sociales << ", "
+                 << "Nota biologia: " << biologia << ", "
+                 << "Nota fisica: " << fisica << ", "
+                 << "Nota educacion fisica: " << educ_fisica << ", "
+                 << "Nota artes: " << artes << endl;
+
+            numestudiantes++;
+        }
+    }
+    archivo.close();
+}
+
 int main()
 {
 
@@ -46,7 +93,7 @@ int main()
         switch (opcion)
         {
         case 1:
-
+            todos_los_estudiantes();
             break;
 
         case 2:
@@ -73,21 +120,8 @@ int main()
 
             break;
 
-        case 8:
-            
-            break;
-            
-        case 9:
-            
-            break;
+        default:
 
-        case 0:
-
-            return 0;
-
-         default:
-             
-            cout << "Opcion incorrecta" ;
             return 0;
         }
 
