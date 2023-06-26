@@ -48,15 +48,11 @@ void todos_los_estudiantes()
             getline(archivo, artes, '\n');
 
             cout << "Nombre: " << nombre << ", "
-                 << "Apellido: " << apellido << ", "
-                 << "E-mail: " << email << ", "
-                 << "Genero: " << genero << ", "
-                 << "Nota matematicas: " << matematicas << ", "
-                 << "Nota sociales: " << sociales << ", "
-                 << "Nota biologia: " << biologia << ", "
-                 << "Nota fisica: " << fisica << ", "
-                 << "Nota educacion fisica: " << educ_fisica << ", "
-                 << "Nota artes: " << artes << endl;
+                 << "Apellido: " << apellido << ", ";
+            float promedio;
+            promedio = (stof(matematicas) + stof(sociales) + stof(biologia) + stof(fisica) + stof(educ_fisica) + stof(artes)) / 6;
+
+            cout << "Promedio: " << promedio << endl;
 
             numestudiantes++;
         }
