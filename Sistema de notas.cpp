@@ -1,12 +1,13 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 using namespace std;
 
 struct Estudiantes
 {
     string nombre;
-    string apellnombreo;
+    string apellido;
     string email;
     string genero;
     int notas_matematica;
@@ -22,6 +23,9 @@ void todos_los_estudiantes();
 void mostrar_estudiante();
 void materias();
 void editar_estudiante();
+void frecuencia();
+void anadir_estudiante();
+void promedio_por_materia();
 
 //Dandole los procesos a las funciones
 void todos_los_estudiantes()
@@ -34,22 +38,23 @@ void todos_los_estudiantes()
     }
     else
     {
-        string linea, nombre, apellnombreo, email, genero, matematicas, sociales, biologia, fisica, educ_fisica, artes;
+        string linea, nombre, apellido, email, genero, matematicas, sociales, biologia, fisica, educ_fisica, artes;
 
         getline(infile, linea);
 
-        while (!infile.eof())
-        {
-            getline(infile, nombre, ';');
-            getline(infile, apellnombreo, ';');
-            getline(infile, email, ';');
-            getline(infile, genero, ';');
-            getline(infile, matematicas, ';');
-            getline(infile, sociales, ';');
-            getline(infile, biologia, ';');
-            getline(infile, fisica, ';');
-            getline(infile, educ_fisica, ';');
-            getline(infile, artes, '\n');
+        while (getline(infile, linea))
+        {   
+            stringstream token(linea);
+            getline(token, nombre, ';');
+            getline(token, apellido, ';');
+            getline(token, email, ';');
+            getline(token, genero, ';');
+            getline(token, matematicas, ';');
+            getline(token, sociales, ';');
+            getline(token, biologia, ';');
+            getline(token, fisica, ';');
+            getline(token, educ_fisica, ';');
+            getline(token, artes, '\n');
 
             if(nombre.empty())
                 {
@@ -61,7 +66,7 @@ void todos_los_estudiantes()
 
             cout << endl 
                  << "Nombre: " << nombre << endl
-                 << "Apellnombreo: " << apellnombreo << endl
+                 << "apellido: " << apellido << endl
                  << "Promedio: " << promedio << endl << endl;
 
         }
@@ -79,25 +84,26 @@ void mostrar_estudiante()
     }
     else
     {
-        string linea, nombre, nombre_buscar, apellnombreo, email, genero, matematicas, sociales, biologia, fisica, educ_fisica, artes;
+        string linea, nombre, nombre_buscar, apellido, email, genero, matematicas, sociales, biologia, fisica, educ_fisica, artes;
 
         cout << endl << "Ingrese el nombre del estudiante a buscar: ";
         cin >> nombre_buscar;
 
         getline(infile, linea);
 
-        while (!infile.eof())
-        {
-            getline(infile, nombre, ';');
-            getline(infile, apellnombreo, ';');
-            getline(infile, email, ';');
-            getline(infile, genero, ';');
-            getline(infile, matematicas, ';');
-            getline(infile, sociales, ';');
-            getline(infile, biologia, ';');
-            getline(infile, fisica, ';');
-            getline(infile, educ_fisica, ';');
-            getline(infile, artes, '\n');
+        while (getline(infile, linea))
+        {   
+            stringstream token(linea);
+            getline(token, nombre, ';');
+            getline(token, apellido, ';');
+            getline(token, email, ';');
+            getline(token, genero, ';');
+            getline(token, matematicas, ';');
+            getline(token, sociales, ';');
+            getline(token, biologia, ';');
+            getline(token, fisica, ';');
+            getline(token, educ_fisica, ';');
+            getline(token, artes, '\n');
 
             if(nombre.empty())
                 {
@@ -112,7 +118,7 @@ void mostrar_estudiante()
                 cout << endl 
                      << "Estudiante encontrado" << endl
                      << "Nombre: " << nombre << endl
-                     << "Apellnombreo: " << apellnombreo << endl
+                     << "apellido: " << apellido << endl
                      << "Promedio: " << promedio << endl << endl;
             }
         }
@@ -131,30 +137,26 @@ void materias()
     }
     else
     {
-        string linea, nombre, nombre_buscar, apellnombreo, email, genero, matematicas, sociales, biologia, fisica, educ_fisica, artes;
+        string linea, nombre, nombre_buscar, apellido, email, genero, matematicas, sociales, biologia, fisica, educ_fisica, artes;
         int pasados_mate = 0, nopasados_mate = 0, pasados_sociales = 0, nopasados_sociales = 0, pasados_biologia = 0, nopasados_biologia = 0;
         int pasados_fisica = 0, nopasados_fisica = 0, pasados_ef = 0, nopasados_ef = 0, pasados_artes = 0, nopasados_artes = 0, total = 0;
 
         getline(infile, linea);
 
-        while (!infile.eof())
-        {
-            getline(infile, nombre, ';');
-            getline(infile, apellnombreo, ';');
-            getline(infile, email, ';');
-            getline(infile, genero, ';');
-            getline(infile, matematicas, ';');
-            getline(infile, sociales, ';');
-            getline(infile, biologia, ';');
-            getline(infile, fisica, ';');
-            getline(infile, educ_fisica, ';');
-            getline(infile, artes, '\n');
+        while (getline(infile, linea))
+        {   
+            stringstream token(linea);
+            getline(token, nombre, ';');
+            getline(token, apellido, ';');
+            getline(token, email, ';');
+            getline(token, genero, ';');
+            getline(token, matematicas, ';');
+            getline(token, sociales, ';');
+            getline(token, biologia, ';');
+            getline(token, fisica, ';');
+            getline(token, educ_fisica, ';');
+            getline(token, artes, '\n');
 
-            if(nombre.empty())
-                {
-                    break;
-                }
-            
             total++;
             
             if(stoi(matematicas) >= 10)
@@ -235,6 +237,181 @@ void materias()
     infile.close();
 }
 
+void editar_estudiante()
+{
+ifstream infile;
+infile.open("Datos_Estudiantes.csv");
+ofstream outfile;
+outfile.open("Datos_Estudiantes_aux.csv");
+    if (!infile||!outfile)
+    {
+        cout << "Error al abrir el archivo" << endl;
+    }
+    else
+    {
+        string linea, nombre, apellido, email, email_buscar, genero, matematicas, sociales, biologia, fisica, educ_fisica, artes;
+        string nombre_nuevo, apellido_nuevo, email_nuevo, genero_nuevo, matematicas_nuevo, sociales_nuevo, biologia_nuevo, fisica_nuevo, ef_nuevo, artes_nuevo;
+        bool existe = false;
+
+        cout << endl << "Ingrese el email del alumno: ";
+        cin >> email_buscar;
+
+        getline(infile, linea);
+        outfile << linea << endl;
+
+        while (getline(infile, linea))
+        {   
+            stringstream token(linea);
+            getline(token, nombre, ';');
+            getline(token, apellido, ';');
+            getline(token, email, ';');
+            getline(token, genero, ';');
+            getline(token, matematicas, ';');
+            getline(token, sociales, ';');
+            getline(token, biologia, ';');
+            getline(token, fisica, ';');
+            getline(token, educ_fisica, ';');
+            getline(token, artes, '\n');
+ 
+                if(email == email_buscar)
+                {
+                existe = true;
+                
+                cout<< endl << "Se ha encontrado el alumno" << endl
+                    << "1. Modificar nombre" << endl
+                    << "2. Modificar apellido" << endl
+                    << "3. Modificar email" << endl
+                    << "4. Modificar genero" << endl
+                    << "5. Modificar notas de matematicas" << endl
+                    << "6. Modificar notas de sociales" << endl
+                    << "7. Modificar notas de biologia" << endl
+                    << "8. Modificar notas de fisica" << endl
+                    << "9. Modificar notas de educacion fisica" << endl
+                    << "10. Modificar notas de arte" << endl
+                    << "11. Modificar todo" << endl
+                    << ": ";
+
+                int opcion;
+                cin >> opcion;
+
+                switch(opcion)
+                {
+                    case 1:
+                    cout << endl << "Nuevo nombre: ";
+                    cin >> nombre_nuevo;
+                    outfile << nombre_nuevo << ";" << apellido << ";" << email << ";" << genero << ";" <<  matematicas << ";" << sociales << ";" << biologia << ";" << fisica
+                             << ";" << educ_fisica << ";" << artes << endl;
+                    break;
+
+                    case 2:
+                    cout << endl << "Nuevo apellido: ";
+                    cin >> apellido_nuevo;
+                    outfile << nombre << ";" << apellido_nuevo << ";" << email << ";" << genero << ";" << matematicas << ";" << sociales << ";" << biologia << ";" << fisica
+                             << ";" << educ_fisica << ";" << artes << endl;
+                    break;
+
+                    case 3: 
+                    cout << endl << "Nuevo email: ";
+                    cin >> email_nuevo;
+                    outfile << nombre << ";" << apellido << ";" << email_nuevo << ";" << genero << ";" <<  matematicas << ";" << sociales << ";" << biologia << ";" << fisica
+                             << ";" << educ_fisica << ";" << artes << endl;
+                    break;
+
+                    case 4:
+                    cout << endl << "Nuevo genero: ";
+                    cin >> genero_nuevo;
+                    outfile << nombre << ";" << apellido << ";" << genero_nuevo << ";" << genero_nuevo << ";" <<  matematicas << ";" << sociales << ";" << biologia << ";" << fisica
+                             << ";" << educ_fisica << ";" << artes << endl;
+                    break;
+
+                    case 5:
+                    cout << endl << "Nueva nota de matematicas: ";
+                    cin >> matematicas_nuevo;
+                    outfile << nombre << ";" << apellido << ";" << email << ";" << genero << ";" << matematicas_nuevo << ";" << sociales << ";" << biologia << ";" << fisica
+                             << ";" << educ_fisica << ";" << artes << endl;
+                    break;
+
+                    case 6:
+                    cout << endl << "Nueva nota de sociales: ";
+                    cin >> sociales_nuevo;
+                    outfile << nombre << ";" << apellido << ";" << email << ";" << genero << ";" << matematicas << ";" << sociales_nuevo << ";" << biologia << ";" << fisica
+                             << ";" << educ_fisica << ";" << artes << endl;
+                    break;
+
+                    case 7:
+                    cout << endl << "Nueva nota de biologia: ";
+                    cin >> biologia_nuevo;
+                    outfile << nombre << ";" << apellido << ";" << email << ";" << genero << ";" << matematicas << ";" << sociales<< ";" << biologia_nuevo << ";" << fisica
+                             << ";" << educ_fisica << ";" << artes << endl;
+                    break;
+
+                    case 8:
+                    cout << endl << "Nueva nota de fisica: ";
+                    cin >> fisica_nuevo;
+                    outfile << nombre << ";" << apellido << ";" << email << ";" << genero << ";" << matematicas << ";" << sociales<< ";" << biologia << ";" << fisica_nuevo
+                             << ";" << educ_fisica << ";" << artes << endl;
+                    break;
+
+                    case 9:
+                    cout << endl << "Nueva nota de educacion fisica: ";
+                    cin >> ef_nuevo;
+                    outfile << nombre << ";" << apellido << ";" << email << ";" <<genero <<";" << matematicas << ";" << sociales<< ";" << biologia << ";" << fisica
+                             << ";" << ef_nuevo << ";" << artes << endl;
+                    break;
+
+                    case 10:
+                    cout << endl << "Nueva nota de artes: ";
+                    cin >> artes_nuevo;
+                    outfile << nombre << ";" << apellido << ";" << email << ";" << genero << ";" << matematicas << ";" << sociales<< ";" << biologia << ";" << fisica
+                             << ";" << educ_fisica << ";" << artes_nuevo << endl;
+                        break;
+
+                    case 11:
+                    cout << endl << "Nuevo nombre: ";
+                    cin >> nombre_nuevo; 
+                    cout << endl << "Nuevo apellido: ";
+                    cin >> apellido_nuevo;
+                    cout << endl << "Nuevo email: ";
+                    cin >> email_nuevo;
+                    cout << endl << "Nuevo genero: ";
+                    cin >> genero_nuevo;
+                    cout << endl << "Nueva nota en matematicas: ";
+                    cin >> matematicas_nuevo;
+                    cout << endl << "Nueva nota en sociales: "; 
+                    cin >> sociales_nuevo;
+                    cout << endl << "Nueva nota en biologia: ";
+                    cin >> biologia_nuevo;
+                    cout << endl << "Nueva nota en fisica: ";
+                    cin >> fisica_nuevo;
+                    cout << endl << "Nueva nota en educacion fisica: ";
+                    cin >> ef_nuevo;
+                    cout << endl << "Nueva nota en artes: ";
+                    cin >> artes_nuevo;
+
+                    outfile << nombre_nuevo << ";" << apellido_nuevo << ";" << email_nuevo << ";" << genero_nuevo << ";" << matematicas_nuevo << ";" << sociales_nuevo << ";" 
+                            << biologia_nuevo << ";" << fisica_nuevo << ";" << ef_nuevo << ";" << artes_nuevo << endl;
+                    break;
+                }
+                cout << endl << "Se ha modificado el estudiante correctamente" << endl;
+            }
+        else
+        {
+            outfile << nombre << ";" << apellido << ";" << email << ";" << genero << ";" << matematicas << ";" << sociales << ";" << biologia << ";" << fisica << ";"
+                    << educ_fisica << ";" << artes << endl; 
+        }
+    }
+
+    if(existe == false)
+    {
+        cout << "No se encontro el estudiante con el correo: " << email_buscar << endl;
+    }
+        infile.close();
+        outfile.close();
+        remove("Datos_Estudiantes.csv");
+        rename("Datos_Estudiantes_aux.csv", "Datos_Estudiantes.csv"); 
+    }
+}
+
 int main()
 {
 
@@ -293,17 +470,17 @@ int main()
             break;
 
         case 3:
-
+            editar_estudiante();
             break;
 
         case 4:
-
+            
             break;
 
         case 5:
-
+            
             break;
-
+            
         case 6:
 
             break;
