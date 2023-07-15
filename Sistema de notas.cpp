@@ -22,8 +22,8 @@ struct Estudiantes
 void todos_los_estudiantes();
 void mostrar_estudiante();
 void materias();
-void editar_estudiante();
 void frecuencia();
+void editar_estudiante();
 void anadir_estudiante();
 void promedio_por_materia();
 
@@ -237,6 +237,47 @@ void materias()
     infile.close();
 }
 
+int frecuencia(string email_ingresado)
+{
+    int contador = 0;
+    ifstream infile;
+    infile.open("Datos_Estudiantes.csv");
+
+    if (!infile)
+    {
+        cout<< "Error al abrir el archivo" << endl;
+    }
+    else
+    {
+        string linea, nombre, apellido, email, genero, matematicas, sociales, biologia, fisica, educ_fisica, artes;
+
+        getline(infile, linea);
+
+        while (getline(infile, linea))
+        {   
+            stringstream token(linea);
+            getline(token, nombre, ';');
+            getline(token, apellido, ';');
+            getline(token, email, ';');
+            getline(token, genero, ';');
+            getline(token, matematicas, ';');
+            getline(token, sociales, ';');
+            getline(token, biologia, ';');
+            getline(token, fisica, ';');
+            getline(token, educ_fisica, ';');
+            getline(token, artes, '\n');
+
+            if(email_ingresado.compare(email) == 0)
+            {
+                contador++;
+            }
+        }
+        infile.close();
+    }
+    return contador;
+}
+
+
 void editar_estudiante()
 {
 ifstream infile;
@@ -292,6 +333,7 @@ outfile.open("Datos_Estudiantes_aux.csv");
                     << ": ";
 
                 int opcion;
+                bool repetido = false;
                 cin >> opcion;
 
                 switch(opcion)
@@ -313,8 +355,17 @@ outfile.open("Datos_Estudiantes_aux.csv");
                     case 3: 
                     cout << endl << "Nuevo email: ";
                     cin >> email_nuevo;
+                    if(frecuencia(email_nuevo) == 0)
+                    {
                     outfile << nombre << ";" << apellido << ";" << email_nuevo << ";" << genero << ";" <<  matematicas << ";" << sociales << ";" << biologia << ";" << fisica
                              << ";" << educ_fisica << ";" << artes << endl;
+                    }else{
+                        cout << "Un estudiante con este correo ya se encuentra en el sistema"<< endl;
+                        repetido = true;
+                        
+                    outfile << nombre << ";" << apellido << ";" << email << ";" << genero << ";" << matematicas << ";" << sociales << ";" << biologia << ";" << fisica << ";"
+                            << educ_fisica << ";" << artes << endl; 
+                    }
                     break;
 
                     case 4:
@@ -392,7 +443,10 @@ outfile.open("Datos_Estudiantes_aux.csv");
                             << biologia_nuevo << ";" << fisica_nuevo << ";" << ef_nuevo << ";" << artes_nuevo << endl;
                     break;
                 }
+                if(repetido = false)
+                {
                 cout << endl << "Se ha modificado el estudiante correctamente" << endl;
+                }
             }
         else
         {
@@ -409,6 +463,57 @@ outfile.open("Datos_Estudiantes_aux.csv");
         outfile.close();
         remove("Datos_Estudiantes.csv");
         rename("Datos_Estudiantes_aux.csv", "Datos_Estudiantes.csv"); 
+    }
+}
+
+void anadir_estudiante()
+{
+    ofstream infile;
+    infile.open("Datos_Estudiantes.csv", ios::app);
+    if (!infile)
+    {
+        cout << "Error al abrir el archivo" << endl;
+    }
+    else
+    {
+        string nombre, apellido, email, genero;
+        int matematicas, sociales, biologia, fisica, educ_fisica, artes;
+
+        cout << endl << "Ingrese el email del estudiante: ";
+        cin >> email;
+
+        if(frecuencia(email) == 0)
+        {
+            cout << "Ingrese el nombre del estudiante: ";
+            cin >> nombre;
+            cout << "Ingrese el apellido estudiante: ";
+            cin >> apellido;
+            cout << "Ingrese el genero del estudiante: ";
+            cin >> genero;
+            cout << "Ingrese la nota en matematicas del estudiante: ";
+            cin >> matematicas;
+            cout << "Ingrese la nota en sociales del estudiante: ";
+            cin >> sociales;
+            cout << "Ingrese la nota en biologia del estudiante: ";
+            cin >> biologia;
+            cout << "Ingrese la nota en fisica del estudiante: ";
+            cin >> fisica;
+            cout << "Ingrese la nota en educacion fisica del estudiante: ";
+            cin >> educ_fisica;
+            cout << "Ingrese la nota en artes del estudiante: ";
+            cin >> artes;
+
+            infile  << nombre << ";" << apellido << ";" << email << ";" << genero << ";" << matematicas << ";" << sociales << ";" << biologia << ";" << fisica
+                    << ";" << educ_fisica << ";" << artes << endl;
+
+            infile.close();
+            cout << endl << "Se ingreso con exito el estudiante" << endl;
+        }
+        else
+        {                        
+            cout << "El estudiante ya se encuentra en el sistema"<< endl;
+            infile.close();        
+        }
     }
 }
 
@@ -474,7 +579,7 @@ int main()
             break;
 
         case 4:
-            
+            anadir_estudiante();
             break;
 
         case 5:
@@ -482,7 +587,7 @@ int main()
             break;
             
         case 6:
-
+            
             break;
 
         case 7:
@@ -502,5 +607,5 @@ int main()
             return 0;
         }
 
-    } while (opcion == 1 || opcion == 2 || opcion == 3 || opcion == 4 || opcion == 5 || opcion == 6 || opcion == 7);
+    } while (opcion == 1 || opcion == 2 || opcion == 3 || opcion == 4 || opcion == 5 || opcion == 6 || opcion == 7 || opcion == 8);
 }
