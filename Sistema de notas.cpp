@@ -18,6 +18,8 @@ struct Estudiantes
     int notas_artes;
 };
 
+Estudiantes estudiante[1500];
+
 //Funciones que se van a usar:
 void todos_los_estudiantes();
 void mostrar_estudiante();
@@ -26,6 +28,21 @@ void frecuencia();
 void editar_estudiante();
 void anadir_estudiante();
 void promedio_por_materia();
+void top_estudiantes_por_materia();
+
+//Algoritmos de ordenamiento
+void partition_mate();
+void quickSort_mate();
+void partition_soc();
+void quickSort_soc();
+void partition_bio();
+void quickSort_bio();
+void partiyion_fis();
+void quickSort_fis();
+void partition_ef();
+void quickSort_ef();
+void partition_art();
+void quickSort_art();
 
 //Dandole los procesos a las funciones
 void todos_los_estudiantes()
@@ -55,11 +72,6 @@ void todos_los_estudiantes()
             getline(token, fisica, ';');
             getline(token, educ_fisica, ';');
             getline(token, artes, '\n');
-
-            if(nombre.empty())
-                {
-                    break;
-                }
 
             float promedio;
             promedio = (stof(matematicas) + stof(sociales) + stof(biologia) + stof(fisica) + stof(educ_fisica) + stof(artes)) / 6;
@@ -104,11 +116,6 @@ void mostrar_estudiante()
             getline(token, fisica, ';');
             getline(token, educ_fisica, ';');
             getline(token, artes, '\n');
-
-            if(nombre.empty())
-                {
-                    break;
-                }
 
             float promedio;
             promedio = (stof(matematicas) + stof(sociales) + stof(biologia) + stof(fisica) + stof(educ_fisica) + stof(artes)) / 6;
@@ -582,6 +589,328 @@ void promedio_por_materia()
     infile.close();
 }
 
+int partition_mate(Estudiantes arr[], int low, int high) {
+    Estudiantes pivot = arr[high];
+    int i = low - 1;
+  
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j].notas_matematica >= pivot.notas_matematica) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+  
+    swap(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+
+void quickSort_mate(Estudiantes arr[], int low, int high) {
+    if (low < high) {
+        int pivotIndex = partition_mate(arr, low, high);
+  
+        quickSort_mate(arr, low, pivotIndex - 1);
+        quickSort_mate(arr, pivotIndex + 1, high);
+    }
+}
+
+int partition_soc(Estudiantes arr[], int low, int high) {
+    Estudiantes pivot = arr[high];
+    int i = low - 1;
+  
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j].notas_sociales >= pivot.notas_sociales) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+  
+    swap(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+
+void quickSort_soc(Estudiantes arr[], int low, int high) {
+    if (low < high) {
+        int pivotIndex = partition_soc(arr, low, high);
+  
+        quickSort_soc(arr, low, pivotIndex - 1);
+        quickSort_soc(arr, pivotIndex + 1, high);
+    }
+}
+
+int partition_bio(Estudiantes arr[], int low, int high) {
+    Estudiantes pivot = arr[high];
+    int i = low - 1;
+  
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j].notas_biologia >= pivot.notas_biologia) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+  
+    swap(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+
+void quickSort_bio(Estudiantes arr[], int low, int high) {
+    if (low < high) {
+        int pivotIndex = partition_bio(arr, low, high);
+  
+        quickSort_bio(arr, low, pivotIndex - 1);
+        quickSort_bio(arr, pivotIndex + 1, high);
+    }
+}
+
+int partition_fis(Estudiantes arr[], int low, int high) {
+    Estudiantes pivot = arr[high];
+    int i = low - 1;
+  
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j].notas_fisica >= pivot.notas_fisica) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+  
+    swap(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+
+void quickSort_fis(Estudiantes arr[], int low, int high) {
+    if (low < high) {
+        int pivotIndex = partition_fis(arr, low, high);
+  
+        quickSort_fis(arr, low, pivotIndex - 1);
+        quickSort_fis(arr, pivotIndex + 1, high);
+    }
+}
+
+int partition_ef(Estudiantes arr[], int low, int high) {
+    Estudiantes pivot = arr[high];
+    int i = low - 1;
+  
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j].notas_educ_fisica >= pivot.notas_educ_fisica) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+  
+    swap(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+
+void quickSort_ef(Estudiantes arr[], int low, int high) {
+    if (low < high) {
+        int pivotIndex = partition_ef(arr, low, high);
+  
+        quickSort_ef(arr, low, pivotIndex - 1);
+        quickSort_ef(arr, pivotIndex + 1, high);
+    }
+}
+
+int partition_art(Estudiantes arr[], int low, int high) {
+    Estudiantes pivot = arr[high];
+    int i = low - 1;
+  
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j].notas_artes >= pivot.notas_artes) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+  
+    swap(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+
+void quickSort_art(Estudiantes arr[], int low, int high) {
+    if (low < high) {
+        int pivotIndex = partition_art(arr, low, high);
+  
+        quickSort_art(arr, low, pivotIndex - 1);
+        quickSort_art(arr, pivotIndex + 1, high);
+    }
+}
+
+void top_estudiantes_por_materia()
+{
+    ifstream infile;
+    infile.open("Datos_Estudiantes.csv");
+    if (!infile)
+    {
+        cout << "Error al abrir el infile" << endl;
+    }
+    else
+    {
+        string linea, nombre, apellido, email, genero, matematicas, sociales, biologia, fisica, educ_fisica, artes;
+        int numestudiantes = 0;
+
+        getline(infile, linea);
+
+        while (getline(infile, linea))
+        {   
+            stringstream token(linea);
+            getline(token, nombre, ';');
+            getline(token, apellido, ';');
+            getline(token, email, ';');
+            getline(token, genero, ';');
+            getline(token, matematicas, ';');
+            getline(token, sociales, ';');
+            getline(token, biologia, ';');
+            getline(token, fisica, ';');
+            getline(token, educ_fisica, ';');
+            getline(token, artes, '\n');
+
+            estudiante[numestudiantes].nombre = nombre;
+            estudiante[numestudiantes].apellido = apellido;
+            estudiante[numestudiantes].email = email;
+            estudiante[numestudiantes].genero = genero;
+            estudiante[numestudiantes].notas_matematica = stoi(matematicas);
+            estudiante[numestudiantes].notas_sociales = stoi(sociales);
+            estudiante[numestudiantes].notas_biologia = stoi(biologia);
+            estudiante[numestudiantes].notas_fisica = stoi(fisica);
+            estudiante[numestudiantes].notas_educ_fisica = stoi(educ_fisica);
+            estudiante[numestudiantes].notas_artes = stoi(artes);
+            numestudiantes++;
+        }
+    
+            cout << "-- 10 mejores estudiantes --" << endl
+                 << "1. Matematicas" << endl
+                 << "2. Sociales" << endl
+                 << "3. Biologia" << endl
+                 << "4. Fisica" << endl
+                 << "5. Educacion fisica" << endl
+                 << "6. Artes" << endl
+                 << " : ";
+
+            int opcion;
+            cin >> opcion;
+            switch(opcion)
+            {
+                case 1:
+                quickSort_mate(estudiante, 0, numestudiantes - 1);
+                cout << endl << "10 Mejores estudiantes en mate: " << endl << endl;
+                for (int i = 0; i < 10; i++)
+                {
+                float promedio = (estudiante[i].notas_biologia + estudiante[i].notas_matematica + estudiante[i].notas_sociales + estudiante[i].notas_fisica + estudiante[i].notas_educ_fisica + estudiante[i].notas_artes) / 6;
+                    cout << "#" << i+1 << ". " << estudiante[i].nombre << " " << estudiante[i].apellido << endl
+                         << "Email: " << estudiante[i].email << endl
+                         << "Genero: " <<  estudiante[i].genero << endl
+                         << "Nota en matematicas: " << estudiante[i].notas_matematica << endl
+                         << "Nota en sociales: " << estudiante[i].notas_sociales << endl
+                         << "Nota en biologia: " << estudiante[i].notas_biologia << endl
+                         << "Nota en fisica: " << estudiante[i].notas_fisica << endl
+                         << "Nota en educacion fisica: " << estudiante[i].notas_educ_fisica << endl
+                         << "Nota en artes: " << estudiante[i].notas_artes<< endl
+                         << "Promedio total: " << promedio << endl << endl;
+                        
+                }
+                break;
+
+                case 2:
+                quickSort_soc(estudiante, 0, numestudiantes - 1);
+                cout << endl << "10 Mejores estudiantes en sociales: " << endl;
+                for (int i = 0; i < 10; i++)
+                {
+                float promedio = (estudiante[i].notas_biologia + estudiante[i].notas_matematica + estudiante[i].notas_sociales + estudiante[i].notas_fisica + estudiante[i].notas_educ_fisica + estudiante[i].notas_artes) / 6;
+                    cout << "#" << i+1 << ". " << estudiante[i].nombre << " " << estudiante[i].apellido << endl
+                         << "Email: " << estudiante[i].email << endl
+                         << "Genero: " <<  estudiante[i].genero << endl
+                         << "Nota en sociales: " << estudiante[i].notas_sociales << endl
+                         << "Nota en matematicas: " << estudiante[i].notas_matematica << endl
+                         << "Nota en biologia: " << estudiante[i].notas_biologia << endl
+                         << "Nota en fisica: " << estudiante[i].notas_fisica << endl
+                         << "Nota en educacion fisica: " << estudiante[i].notas_educ_fisica << endl
+                         << "Nota en artes: " << estudiante[i].notas_artes<< endl
+                         << "Promedio total: " << promedio << endl << endl;
+                }
+                break;
+
+                case 3:
+                quickSort_bio(estudiante, 0, numestudiantes - 1);
+                cout << endl << "10 Mejores estudiantes en biologia: " << endl;
+                for (int i = 0; i < 10; i++)
+                {
+                float promedio = (estudiante[i].notas_biologia + estudiante[i].notas_matematica + estudiante[i].notas_sociales + estudiante[i].notas_fisica + estudiante[i].notas_educ_fisica + estudiante[i].notas_artes) / 6;
+                    cout << "#" << i+1 << ". " << estudiante[i].nombre << " " << estudiante[i].apellido << endl
+                         << "Email: " << estudiante[i].email << endl
+                         << "Genero: " <<  estudiante[i].genero << endl
+                         << "Nota en biologia: " << estudiante[i].notas_biologia << endl
+                         << "Nota en matematicas: " << estudiante[i].notas_matematica << endl
+                         << "Nota en sociales: " << estudiante[i].notas_sociales << endl
+                         << "Nota en fisica: " << estudiante[i].notas_fisica << endl
+                         << "Nota en educacion fisica: " << estudiante[i].notas_educ_fisica << endl
+                         << "Nota en artes: " << estudiante[i].notas_artes<< endl
+                         << "Promedio total: " << promedio << endl << endl;
+                }
+                break;
+
+                case 4:
+                quickSort_fis(estudiante, 0, numestudiantes - 1);
+                cout << endl <<"10 Mejores estudiantes en fisica: " << endl;
+                for (int i = 0; i < 10; i++)
+                {
+                float promedio = (estudiante[i].notas_biologia + estudiante[i].notas_matematica + estudiante[i].notas_sociales + estudiante[i].notas_fisica + estudiante[i].notas_educ_fisica + estudiante[i].notas_artes) / 6;
+                    cout << "#" << i+1 << ". " << estudiante[i].nombre << " " << estudiante[i].apellido << endl
+                         << "Email: " << estudiante[i].email << endl
+                         << "Genero: " <<  estudiante[i].genero << endl
+                         << "Nota en fisica: " << estudiante[i].notas_fisica << endl
+                         << "Nota en matematicas: " << estudiante[i].notas_matematica << endl
+                         << "Nota en sociales: " << estudiante[i].notas_sociales << endl
+                         << "Nota en biologia: " << estudiante[i].notas_biologia << endl
+                         << "Nota en educacion fisica: " << estudiante[i].notas_educ_fisica << endl
+                         << "Nota en artes: " << estudiante[i].notas_artes<< endl
+                         << "Promedio total: " << promedio << endl << endl;
+                }
+                break;
+
+                case 5:
+                quickSort_ef(estudiante, 0, numestudiantes - 1);
+                cout << endl << "10 Mejores estudiantes en educacion fisica: " << endl;
+                for (int i = 0; i < 10; i++)
+                {
+                float promedio = (estudiante[i].notas_biologia + estudiante[i].notas_matematica + estudiante[i].notas_sociales + estudiante[i].notas_fisica + estudiante[i].notas_educ_fisica + estudiante[i].notas_artes) / 6;
+                    cout << "#" << i+1 << ". " << estudiante[i].nombre << " " << estudiante[i].apellido << endl
+                         << "Email: " << estudiante[i].email << endl
+                         << "Genero: " <<  estudiante[i].genero << endl
+                         << "Nota en educacion fisica: " << estudiante[i].notas_educ_fisica << endl
+                         << "Nota en matematicas: " << estudiante[i].notas_matematica << endl
+                         << "Nota en sociales: " << estudiante[i].notas_sociales << endl
+                         << "Nota en biologia: " << estudiante[i].notas_biologia << endl
+                         << "Nota en fisica: " << estudiante[i].notas_fisica << endl
+                         << "Nota en artes: " << estudiante[i].notas_artes<< endl
+                         << "Promedio total: " << promedio << endl << endl;
+                }
+                break;
+
+                case 6:
+                quickSort_art(estudiante, 0, numestudiantes - 1);
+                cout << endl << "10 Mejores estudiantes en artes: " << endl;
+                for (int i = 0; i < 10; i++)
+                {
+                float promedio = (estudiante[i].notas_biologia + estudiante[i].notas_matematica + estudiante[i].notas_sociales + estudiante[i].notas_fisica + estudiante[i].notas_educ_fisica + estudiante[i].notas_artes) / 6;
+                    cout << "#" << i+1 << ". " << estudiante[i].nombre << " " << estudiante[i].apellido << endl
+                         << "Email: " << estudiante[i].email << endl
+                         << "Genero: " <<  estudiante[i].genero << endl
+                         << "Nota en artes: " << estudiante[i].notas_artes << endl
+                         << "Nota en matematicas: " << estudiante[i].notas_matematica << endl
+                         << "Nota en sociales: " << estudiante[i].notas_sociales << endl
+                         << "Nota en biologia: " << estudiante[i].notas_biologia << endl
+                         << "Nota en fisica: " << estudiante[i].notas_fisica << endl
+                         << "Nota en educacion fisica: " << estudiante[i].notas_educ_fisica << endl 
+                         << "Promedio total: " << promedio << endl << endl;
+                }
+                break;
+
+                default:
+                    cout << endl << "Opcion invalida";
+                break;
+            }
+    }
+    infile.close();
+}
+
 int main()
 {
 
@@ -594,13 +923,13 @@ int main()
              << "           -- Sistema de notas --" << endl
              << endl
              << "1. Mostrar estudiante/s y su nota promedio" << endl
-             << "2. Mostrar materias y la cantnombread de alumnos (total, pasados y no pasados)  " << endl
+             << "2. Mostrar materias y cantidad de alumnos (pasados, no pasados, total)  " << endl
              << "3. Editar informacion de estudiantes" << endl
              << "4. Agregar estudiante nuevo" << endl
-             << "5. Sacar promedio de notas por materia " << endl
-             << "6. Top 10 estudiantes por materia" << endl
-             << "7. Crear boleta/s" << endl
-             << "8. Proporcion de generos por materia aprobada y reprobada " << endl
+             << "5. Promedio de notas por materia" << endl
+             << "6. Mejores 10 estudiantes por materia" << endl
+             << "7. Generar boleta/s" << endl
+             << "8. Proporcion de generos por materia (aprobados y reprobados) " << endl
              << "0. Cerrar programa " << endl
              << "*************************************************************" << endl
              << " : ";
@@ -652,7 +981,7 @@ int main()
             break;
             
         case 6:
-            
+            top_estudiantes_por_materia();
             break;
 
         case 7:
