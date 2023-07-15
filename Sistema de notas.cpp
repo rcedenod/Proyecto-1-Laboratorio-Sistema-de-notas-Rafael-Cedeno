@@ -29,6 +29,7 @@ void editar_estudiante();
 void anadir_estudiante();
 void promedio_por_materia();
 void top_estudiantes_por_materia();
+void boletas();
 
 //Algoritmos de ordenamiento
 void partition_mate();
@@ -911,6 +912,73 @@ void top_estudiantes_por_materia()
     infile.close();
 }
 
+void boletas()
+{
+    int n;
+
+    cout << endl << "Ingrese el numero de boletas que desea generar: ";
+    cin >> n;
+    cout << endl;
+
+    string correos[n];
+    ifstream infile;
+    infile.open("Datos_Estudiantes.csv");
+    if (!infile)
+    {
+        cout << "Error al abrir el archivo" << endl;
+        exit;
+    }
+
+
+    for(int i = 0; i < n; i++)
+    {
+    cout << "Ingrese el correo del estudiante #" << i+1 << ": ";
+    cin >> correos[i];
+    cout << endl;
+
+        string linea, nombre, apellido, email, genero, matematicas, sociales, biologia, fisica, educ_fisica, artes;
+        bool existe = false;
+
+        getline(infile, linea);
+
+        while (getline(infile, linea))
+        {   
+            stringstream token(linea);
+            getline(token, nombre, ';');
+            getline(token, apellido, ';');
+            getline(token, email, ';');
+            getline(token, genero, ';');
+            getline(token, matematicas, ';');
+            getline(token, sociales, ';');
+            getline(token, biologia, ';');
+            getline(token, fisica, ';');
+            getline(token, educ_fisica, ';');
+            getline(token, artes, '\n');
+
+                if(correos[i] == email)
+                {
+                    existe = true;
+                    float promedio = (stof(matematicas) + stof(sociales) + stof(biologia) + stof(fisica) + stof(educ_fisica) + stof(artes)) / 6;
+                    cout << "-- Boleta. Universidad Rafael Urdaneta. Periodo 2023. Estudiante: " << nombre << " " << apellido << " -- " << endl
+                         << "Notas de matematicas: " << matematicas << endl
+                         << "Notas de sociales: " << sociales << endl
+                         << "Notas de biologia: " << biologia << endl
+                         << "Notas de fisica: " << fisica << endl
+                         << "Notas de educacion fisica: " << educ_fisica << endl
+                         << "Notas de artes: " << artes << endl 
+                         << "Promedio total: " << promedio << endl << endl;
+                    break;   
+                }
+            }
+            if(existe = false)
+                    {
+                    cout << "No hay ningun estudiante con el correo " << correos[i] << " registrado en el sistema"; 
+                    break;   
+                    }
+    }
+    infile.close();
+}
+
 int main()
 {
 
@@ -985,7 +1053,7 @@ int main()
             break;
 
         case 7:
-
+            boletas();
             break;
         
         case 8:
