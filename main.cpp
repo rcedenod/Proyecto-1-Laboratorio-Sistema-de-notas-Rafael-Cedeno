@@ -13,6 +13,7 @@
 #include "top_estudiantes_x_materia.cpp"
 #include "boletas.cpp"
 #include "proporcion_genero_x_materia.cpp"
+#include "borrar_estudiante.cpp"
 
 using namespace std;
 
@@ -35,6 +36,7 @@ int main()
              << "6. Mejores 10 estudiantes por materia" << endl
              << "7. Generar boleta/s" << endl
              << "8. Proporcion de generos por materia (aprobados y reprobados)" << endl
+             << "9. Borrar un estudiante" << endl
              << "0. Cerrar programa " << endl
              << "*************************************************************" << endl
              << " : ";
@@ -97,6 +99,10 @@ int main()
             proporcion_genero_x_materia();
             break;
         
+        case 9:
+            borrar_estudiante();
+            break;
+        
         case 0:
 
             return 0;
@@ -106,5 +112,5 @@ int main()
             return 0;
         }
 
-    } while (opcion == 1 || opcion == 2 || opcion == 3 || opcion == 4 || opcion == 5 || opcion == 6 || opcion == 7 || opcion == 8);
+    } while (opcion == 1 || opcion == 2 || opcion == 3 || opcion == 4 || opcion == 5 || opcion == 6 || opcion == 7 || opcion == 8 || opcion == 9);
 }
