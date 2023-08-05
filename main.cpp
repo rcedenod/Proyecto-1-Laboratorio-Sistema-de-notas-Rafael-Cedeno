@@ -16,6 +16,7 @@
 #include "borrar_estudiante.cpp"
 #include "top_estudiantes_x_seccion.cpp"
 #include "rendimiento_profesor.cpp"
+#include "mejores_profesores.cpp"
 
 using namespace std;
 
@@ -41,6 +42,7 @@ int main()
              << "9. Borrar un estudiante" << endl
              << "10. Top 10 por seccion" << endl
              << "11. Rendimiento de un profesor" << endl
+             << "12. Mejores profesores (materia / seccion)" << endl
              << "0. Cerrar programa " << endl
              << "*************************************************************" << endl
              << " : ";
@@ -110,9 +112,13 @@ int main()
         case 10:
             top_estudiantes_x_seccion();
             break;
-
+        
         case 11:
             rendimiento_profesor();
+            break;
+        
+        case 12:
+            mejores_profesores();
             break;
         
         case 0:
@@ -124,5 +130,5 @@ int main()
             return 0;
         }
 
-    } while (opcion > 0 && opcion <= 11);
+    } while (opcion > 0 && opcion <= 12);
 }
