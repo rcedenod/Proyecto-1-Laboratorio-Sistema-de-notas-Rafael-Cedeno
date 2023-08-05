@@ -15,6 +15,7 @@
 #include "proporcion_genero_x_materia.cpp"
 #include "borrar_estudiante.cpp"
 #include "top_estudiantes_x_seccion.cpp"
+#include "rendimiento_profesor.cpp"
 
 using namespace std;
 
@@ -39,6 +40,7 @@ int main()
              << "8. Proporcion de generos por materia (aprobados y reprobados)" << endl
              << "9. Borrar un estudiante" << endl
              << "10. Top 10 por seccion" << endl
+             << "11. Rendimiento de un profesor" << endl
              << "0. Cerrar programa " << endl
              << "*************************************************************" << endl
              << " : ";
@@ -108,6 +110,10 @@ int main()
         case 10:
             top_estudiantes_x_seccion();
             break;
+
+        case 11:
+            rendimiento_profesor();
+            break;
         
         case 0:
 
@@ -118,5 +124,5 @@ int main()
             return 0;
         }
 
-    } while (opcion > 0 && opcion <= 10);
+    } while (opcion > 0 && opcion <= 11);
 }
