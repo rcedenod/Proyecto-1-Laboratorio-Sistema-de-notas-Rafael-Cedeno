@@ -14,6 +14,7 @@
 #include "boletas.cpp"
 #include "proporcion_genero_x_materia.cpp"
 #include "borrar_estudiante.cpp"
+#include "top_estudiantes_x_seccion.cpp"
 
 using namespace std;
 
@@ -37,6 +38,7 @@ int main()
              << "7. Generar boleta/s" << endl
              << "8. Proporcion de generos por materia (aprobados y reprobados)" << endl
              << "9. Borrar un estudiante" << endl
+             << "10. Top 10 por seccion" << endl
              << "0. Cerrar programa " << endl
              << "*************************************************************" << endl
              << " : ";
@@ -102,6 +104,10 @@ int main()
         case 9:
             borrar_estudiante();
             break;
+
+        case 10:
+            top_estudiantes_x_seccion();
+            break;
         
         case 0:
 
@@ -112,5 +118,5 @@ int main()
             return 0;
         }
 
-    } while (opcion == 1 || opcion == 2 || opcion == 3 || opcion == 4 || opcion == 5 || opcion == 6 || opcion == 7 || opcion == 8 || opcion == 9);
+    } while (opcion > 0 && opcion <= 10);
 }
