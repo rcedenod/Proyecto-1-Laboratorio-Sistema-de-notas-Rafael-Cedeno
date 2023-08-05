@@ -3,7 +3,9 @@
 using namespace std;
 
 struct Estudiantes
-{
+{   
+    int id;
+    int seccion;
     string nombre;
     string apellido;
     string email;
@@ -14,6 +16,28 @@ struct Estudiantes
     int notas_fisica;
     int notas_educ_fisica;
     int notas_artes;
+};
+
+struct Secciones{
+    int id;
+    string nombre;
+    string apellido;
+    string seccion;
+    float matematica;
+    float sociales;
+    float biologia;
+    float ef;
+    float artes;
+    float promedio;
+};
+
+struct Mejores{
+    int id;
+    string materia;
+    float rendimiento;
+    string nombre;
+    string apellido;
+    string seccion;
 };
 
 Estudiantes estudiante[1500];
@@ -159,5 +183,57 @@ void quicksort_art(Estudiantes arr[], int low, int high) {
   
         quicksort_art(arr, low, pivotIndex - 1);
         quicksort_art(arr, pivotIndex + 1, high);
+    }
+}
+
+void swap(float& a, float& b) {
+    float temp = a;
+    a = b;
+    b = temp;
+}
+
+int partition_secciones(Secciones arr[], int low, int high) {
+    Secciones pivot = arr[high];
+    int i = low - 1;
+
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j].promedio >= pivot.promedio) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+void quicksort_secciones(Secciones arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition_secciones(arr, low, high);
+
+        quicksort_secciones(arr, low, pi - 1);
+        quicksort_secciones(arr, pi + 1, high);
+    }
+}
+
+int partition_mejores_prof(Mejores arr[], int low, int high) {
+    Mejores pivot = arr[high];
+    int i = low - 1;
+
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j].rendimiento >= pivot.rendimiento) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+void quicksort_mejores_prof(Mejores arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition_mejores_prof(arr, low, high);
+
+        quicksort_mejores_prof(arr, low, pi - 1);
+        quicksort_mejores_prof(arr, pi + 1, high);
     }
 }
