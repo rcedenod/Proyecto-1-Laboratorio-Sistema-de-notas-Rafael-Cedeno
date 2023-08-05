@@ -17,6 +17,10 @@
 #include "top_estudiantes_x_seccion.cpp"
 #include "rendimiento_profesor.cpp"
 #include "mejores_profesores.cpp"
+#include "anadir_profesor.cpp"
+#include "editar_profesor.cpp"
+#include "borrar_profesor.cpp"
+#include "estudiante_y_profesor.cpp"
 
 using namespace std;
 
@@ -43,6 +47,10 @@ int main()
              << "10. Top 10 por seccion" << endl
              << "11. Rendimiento de un profesor" << endl
              << "12. Mejores profesores (materia / seccion)" << endl
+             << "13. Agregar profesor nuevo" << endl
+             << "14. Editar informacion de profesor" << endl
+             << "15. Borrar un profesor" << endl
+             << "16. Buscar estudiante y su profesor de materia" << endl
              << "0. Cerrar programa " << endl
              << "*************************************************************" << endl
              << " : ";
@@ -121,6 +129,22 @@ int main()
             mejores_profesores();
             break;
         
+        case 13:
+            anadir_profesor();
+            break;
+        
+        case 14:
+            editar_profesor();
+            break;
+        
+        case 15:
+            borrar_profesor();
+            break;
+        
+        case 16:
+            estudiante_y_profesor();
+            break;
+        
         case 0:
 
             return 0;
@@ -130,5 +154,5 @@ int main()
             return 0;
         }
 
-    } while (opcion > 0 && opcion <= 12);
+    } while (opcion > 0 && opcion <= 16);
 }
