@@ -21,6 +21,7 @@
 #include "editar_profesor.cpp"
 #include "borrar_profesor.cpp"
 #include "estudiante_y_profesor.cpp"
+#include "top_aplazados.cpp"
 
 using namespace std;
 
@@ -51,6 +52,7 @@ int main()
              << "14. Editar informacion de profesor" << endl
              << "15. Borrar un profesor" << endl
              << "16. Buscar estudiante y su profesor de materia" << endl
+             << "17. Top 10 alumnos con mas materias aplazadas" << endl
              << "0. Cerrar programa " << endl
              << "*************************************************************" << endl
              << " : ";
@@ -144,6 +146,10 @@ int main()
         case 16:
             estudiante_y_profesor();
             break;
+
+        case 17:
+            top_aplazados();
+            break;
         
         case 0:
 
@@ -154,5 +160,5 @@ int main()
             return 0;
         }
 
-    } while (opcion > 0 && opcion <= 16);
+    } while (opcion > 0 && opcion <= 17);
 }
